@@ -1,0 +1,45 @@
+{% extends 'tracker/base.html' %}
+
+{% block head_title %}
+    Transactions List
+{% endblock %}
+
+{% block content %}
+    <div class="relative overflow-x-auto text-white" id="transaction-block">
+        {% load widget_tweaks %}
+        <h1 class="mt-8 mb-4 prose prose-2xl text-white">
+            Create Transaction
+        </h1>
+
+        <form hx-post="{% url 'create-transaction' %}">
+
+            {% include 'tracker/partials/transaction-form.html' %}
+
+            <div class="mt-10 flex items-center justify-around">
+                <button class="btn btn-outline btn-success btn-wide">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                    </svg>
+
+                    Add
+                </button>
+
+                <button class="btn btn-outline btn-error btn-wide"
+                        hx-get="{% url 'transactions-list' %}"
+                        hx-push-url="/transactions"
+                        hx-target="#transaction-block"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                    </svg>
+
+                    Cancel
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+{% endblock %}
